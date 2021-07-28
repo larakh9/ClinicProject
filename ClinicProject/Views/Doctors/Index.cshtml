@@ -1,0 +1,132 @@
+﻿@model ClinicProject.Paging.PagingList<ClinicProject.Models.Doctor>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+@{
+    ViewBag.Title = "Doctors";
+}
+
+<h1>List of doctors</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<form asp-controller="Doctors" asp-action="Search">
+    <p>
+        Search by Doctors's name: <input type="text" name="SearchString" />
+        <input type="submit" value="Filter" />
+    </p>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.ActionLink("Doctor Name", "Index", new { sortOrder = ViewBag.NameSort, currentFilter = ViewBag.CurrentFilter })
+            </th>
+            <th>
+                @Html.ActionLink("Country", "Index", new { sortOrder = ViewBag.NameSort, currentFilter = ViewBag.CurrentFilter })
+            </th>
+            <th>
+                @Html.ActionLink("Address", "Index", new { sortOrder = ViewBag.NameSort, currentFilter = ViewBag.CurrentFilter })
+            </th>
+            <th>
+                @Html.ActionLink("Notes", "Index", new { sortOrder = ViewBag.NameSort, currentFilter = ViewBag.CurrentFilter })
+            </th>
+            <th>
+                @Html.ActionLink("PhoneNum", "Index", new { sortOrder = ViewBag.NameSort, currentFilter = ViewBag.CurrentFilter })
+            </th>
+            <th>
+                @Html.ActionLink("MonthlySalary", "Index", new { sortOrder = ViewBag.NameSort, currentFilter = ViewBag.CurrentFilter })
+            </th>
+            <th>
+                @Html.ActionLink("Email", "Index", new { sortOrder = ViewBag.NameSort, currentFilter = ViewBag.CurrentFilter })
+            </th>
+            <th>
+                @Html.ActionLink("IBAN", "Index", new { sortOrder = ViewBag.NameSort, currentFilter = ViewBag.CurrentFilter })
+            </th>
+            <th>
+                @Html.ActionLink("Specialization", "Index", new { sortOrder = ViewBag.NameSort, currentFilter = ViewBag.CurrentFilter })
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DoctorName)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Country)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Notes)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PhoneNum)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MonthlySalary)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IBAN)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Specialization.SpecializationName)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id"
+                       onclick="return confirm('Do you want to delete the selected item?');">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<br />
+@{
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+    var totalPageNo = Model.TotalPageNo;
+    var currentPageNo = Model.PageIndex;
+}
+
+<a asp-action="Index"
+   asp-route-sortOrder="@ViewData["sortOrder"]"
+   asp-route-pageNo="@(Model.PageIndex - 1)"
+   asp-route-currentFilter="@ViewData["currentFilter"]"
+   class="btn btn-default @prevDisabled">
+    Previous
+</a>
+<a asp-action="Index"
+   asp-route-sortOrder="@ViewData["sortOrder"]"
+   asp-route-pageNo="@(Model.PageIndex + 1)"
+   asp-route-currentFilter="@ViewData["currentFilter"]"
+   class="btn btn-default @nextDisabled">
+    Next
+</a>
+<span>
+    Page No : @currentPageNo of @totalPageNo
+</span>
+
+<body>
+    <style>
+        body {
+            background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0Daw1fxKaawq-wKrfz3eAE9bzU6pUH7741g&usqp=CAU");
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+    </style>
+</body>

@@ -1,0 +1,48 @@
+﻿@model ClinicProject.Models.MedicalHistory
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create new medical history</h1>
+
+<h4>MedicalHistory</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="PatienId" class="control-label"></label>
+                <input asp-for="PatienId" class="form-control" />
+                <span asp-validation-for="PatienId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <textarea asp-for="Description" class="form-control"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+<body>
+    <style>
+        body {
+            background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0Daw1fxKaawq-wKrfz3eAE9bzU6pUH7741g&usqp=CAU");
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+    </style>
+</body>

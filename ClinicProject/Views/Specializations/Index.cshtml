@@ -1,0 +1,46 @@
+﻿@model IEnumerable<ClinicProject.Models.Specialization>
+
+@{
+    ViewData["Title"] = "Specializations";
+}
+
+<h1>List of specializations</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.SpecializationName)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.SpecializationName)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id"
+                   onclick="return confirm('Do you want to delete the selected item?');">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+<body>
+    <style>
+        body {
+            background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0Daw1fxKaawq-wKrfz3eAE9bzU6pUH7741g&usqp=CAU");
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+    </style>
+</body>
